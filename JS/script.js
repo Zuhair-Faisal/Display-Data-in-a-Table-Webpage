@@ -37,18 +37,27 @@ async function getSingleUser(userId) {
     singleUser.innerHTML = "<p>User not found.</p>";
   }
 }
-
 searchBtn.addEventListener("click", () => {
   getSingleUser(userIdInput.value);
 });
 
 async function getUsers() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users");
-  const users = await response.json();
-  console.log(users);
-  users.forEach((user) => {
-    tableBody.innerHTML += `<tr><td>${user.id}</td><td>${user.name}</td><td>${user.email}</td><td>${user.phone}</td><td>${formatAddress(user.address)}</td></tr>`;
-  });
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    if (!response.ok) {
+      throw new Error("Could not fetch users");
+    }
+    const users = await response.json();
+    console.log(users);
+    users.forEach((user) => {
+      tableBody.innerHTML += `<tr><td>${user.id}</td><td>${user.name}</td><td>${user.email}</td><td>${user.phone}</td><td>${formatAddress(user.address)}</td><td>
+              <button class="edit-btn" data-id="${user.id}">Edit</button>
+              <button class="delete-btn" data-id="${user.id}">Delete</button>
+            </td></tr>`;
+    });
+  } catch (error) {
+    tableBody.innerHTML = `<tr><td colspan="6">Could not Load Users. Please Check your Connection and Refresh.</td></tr>`;
+  }
 }
 
 getUsers();
@@ -108,3 +117,28 @@ async function createUser(event) {
 }
 
 createUserForm.addEventListener("submit", createUser);
+
+tableBody.addEventListener("click", async (event) => {
+  if (!event.target.classList.contains("delete-btn")) {
+    return;
+  }
+  const button = event.target;
+  const userId = button.dataset.id;
+  if (!confirm(`Delete user ${userId}?`)) {
+    return;
+  }
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/users/${userId}`,
+      {
+        method: "DELETE",
+      },
+    );
+    if (!response.ok) {
+      throw new Error("Could Not Delete User");
+    }
+    button.closest("tr").remove();
+  } catch (error) {
+    alert("Could Not Delete User. Please Try Again.");
+  }
+});
