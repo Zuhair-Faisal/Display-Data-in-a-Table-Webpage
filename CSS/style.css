@@ -21,15 +21,12 @@ main {
   padding: 24px 16px;
 }
 .cards {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-  flex-wrap: wrap;
   margin-bottom: 32px;
-  align-items: flex-start;
 }
 .card {
-  flex: 1;
-  min-width: 280px;
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -90,4 +87,45 @@ tbody tr:hover {
 }
 tbody tr.new-row {
   background-color: #e8f8ee;
+}
+.button-row {
+  display: flex;
+  gap: 10px;
+}
+.button-row button {
+  flex: 1;
+}
+#putBtn {
+  background-color: #e67e22;
+}
+#putBtn:hover {
+  background-color: #ca6a17;
+}
+#editResult {
+  background-color: #f4f6f8;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: pre-wrap;
+}
+#editResult:empty {
+  display: none;
+}
+#editInfo {
+  color: #666;
+}
+td:last-child {
+  white-space: nowrap;
+}
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  margin-top: 0;
+}
+.delete-btn {
+  background-color: #e74c3c;
+}
+.delete-btn:hover {
+  background-color: #c0392b;
 }

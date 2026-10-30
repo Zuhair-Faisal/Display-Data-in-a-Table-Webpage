@@ -40,6 +40,29 @@
         </section>
       </div>
 
+      <section class="card">
+        <h2>Edit a User</h2>
+        <p id="editInfo">Click "Edit" on a user in the table.</p>
+        <form id="editUserForm">
+          <label for="editName">Name</label>
+          <input type="text" id="editName" />
+          
+          <label for="editEmail">Email</label>
+          <input type="email" id="editEmail" />
+          
+          <label for="editPhone">Phone</label>
+          <input type="tel" id="editPhone" />
+
+          <label for="editCity">Address</label>
+          <input for="text" id="editCity" />
+          <div class="button-row">
+            <button type="button" id="putBtn">Replace (PUT)</button>
+            <button type="button" id="patchBtn">Update (PATCH)</button>
+          </div>
+        </form>
+        <pre id="editResult"></pre>
+      </section>
+
       <h2>All Users</h2>  
       <table id="usersTable">
         <thead>
