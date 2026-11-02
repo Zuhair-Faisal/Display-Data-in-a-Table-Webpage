@@ -245,6 +245,7 @@ document.getElementById("patchBtn").addEventListener("click", async () => {
 
   if (Object.keys(changes).length === 0) {
     document.getElementById("editResult").textContent = "Nothing Changed";
+    return;
   }
 
   try {
@@ -263,7 +264,7 @@ document.getElementById("patchBtn").addEventListener("click", async () => {
     }
 
     const result = await response.json();
-    document.getElementById("editResult").testContent = JSON.stringify(
+    document.getElementById("editResult").textContent = JSON.stringify(
       result,
       null,
       2,
