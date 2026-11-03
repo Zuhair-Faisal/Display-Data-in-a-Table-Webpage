@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/users";
+const API_URL = "http://localhost:4000/users";
 const tableBody = document.getElementById("userData");
 const userIdInput = document.getElementById("userIdInput");
 const searchBtn = document.getElementById("searchBtn");
